@@ -1,6 +1,6 @@
-NAME	=	beauty_two_sphere
+NAME	=	diffuse
 
-PPM		=	beauty_two_sphere.ppm
+PPM		=	diffuse.ppm
 
 CC		=	c++
 

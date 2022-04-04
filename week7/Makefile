@@ -1,6 +1,6 @@
-NAME	=	beauty_two_sphere
+NAME	=	smooth_two_sphere
 
-PPM		=	beauty_two_sphere.ppm
+PPM		=	smooth_two_sphere.ppm
 
 CC		=	c++
 

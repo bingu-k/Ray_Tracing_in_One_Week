@@ -1,6 +1,6 @@
-NAME	=	beauty_two_sphere
+NAME	=	shiny_metal
 
-PPM		=	beauty_two_sphere.ppm
+PPM		=	shiny_metal.ppm
 
 CC		=	c++
 

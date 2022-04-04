@@ -20,6 +20,7 @@ int main() {
 	const double    aspect_ratio(16.0 / 9.0);
 	const int       image_width(800);
 	const int       image_height(static_cast<int>(image_width / aspect_ratio));
+	const int		samples_per_pixel = 100;
 
 	// World
 	hittable_list	world;
@@ -31,13 +32,21 @@ int main() {
 	// Render
 	std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
-	for (int j = image_height - 1; j >= 0; --j) {
-		for (int i = 0; i < image_width; ++i) {
-			double  u(static_cast<double>(i) / (image_width - 1));
-			double  v(static_cast<double>(j) / (image_height - 1));
-			ray     r = cam.get_ray(u, v);
-			color   pixel_color(ray_color(r, world));
-			write_color(std::cout, pixel_color);
+	for (int j = image_height - 1; j >= 0; --j)
+	{
+		std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
+		for (int i = 0; i < image_width; ++i)
+		{
+			color   pixel_color(0.0, 0.0, 0.0);
+			for (int k = 0; k < samples_per_pixel; ++k)
+			{
+				// 원래 값의 0~1까지의 숫자를 100회 뽑아 평균값을 표현.
+				double  u((i + random_double()) / (image_width - 1));
+				double  v((j + random_double()) / (image_height - 1));
+				ray     r = cam.get_ray(u, v);
+				pixel_color += ray_color(r, world);
+			}
+			write_color(std::cout, pixel_color, samples_per_pixel);
 		}
 	}
 }

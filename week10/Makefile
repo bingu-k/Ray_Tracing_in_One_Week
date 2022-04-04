@@ -1,6 +1,6 @@
-NAME	=	beauty_two_sphere
+NAME	=	dielectric
 
-PPM		=	beauty_two_sphere.ppm
+PPM		=	dielectric.ppm
 
 CC		=	c++
 
