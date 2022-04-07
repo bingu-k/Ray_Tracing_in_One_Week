@@ -3,21 +3,37 @@
 #include "ray.hpp"
 #include "camera.hpp"
 
-bool    hit_sphere(const point3 &center, double radius, const ray &r)
+double	hit_sphere(const point3 &center, double radius, const ray &r)
 {
 	vec3	oc(r.point() - center);
 	double	a = dot(r.normal(), r.normal());
-	double	b = 2.0 * dot(oc, r.normal());
+	double	b = dot(oc, r.normal());
 	double	c = dot(oc, oc) - (radius * radius);
-	double	discriminant = (b * b) - (4 * a * c);
-	return (discriminant > 0);
+	double	discriminant = (b * b) - (a * c);
+	if (discriminant <= 0)
+		return (-1);
+	else
+	{
+		double	t1 = (-b - sqrt(discriminant)) / a;
+		double	t2 = (-b + sqrt(discriminant)) / a;
+		if (t1 < t2 && t1 > 0)
+			return (t1);
+		else if (t1 > t2 && t2 > 0)
+			return (t2);
+		else
+			return (-1);
+	}
 }
 
 color   ray_color(const ray &r)
 {
-	if (hit_sphere(point3(2,0,0), 0.5, r))
-		return (color(1, 0, 0));
-	double  t(r._normal.y() + 1.0);
+	double	t = hit_sphere(point3(2,0,0), 0.5, r);
+	if (t != -1)
+	{
+		vec3	N = unit_vec3(r.at(t) - vec3(2, 0, 0));
+		return (color(N.x() + 1, N.y() + 1, N.z() + 1) * 0.5);
+	}
+	t = r._normal.y() + 1.0;
 	return (color(1.0, 1.0, 1.0) * (1.0 - t) + color(0.5, 0.7, 1.0) * t);
 }
 

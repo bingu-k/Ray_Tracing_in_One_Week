@@ -7,7 +7,7 @@
 color   ray_color(const ray &r, const hittable &world, int depth)
 {
 	hit_record	rec;
-	double	t = 0;
+	double		t = 0;
 
 	if (depth <= 0)
 		return (color(0.0,0.0,0.0));

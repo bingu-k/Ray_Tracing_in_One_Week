@@ -12,7 +12,7 @@ void	write_color(std::ostream &os, color pixel_color, int samples_per_pixel)
 	// double	r = pixel_color.x() * scale;
 	// double	g = pixel_color.y() * scale;
 	// double	b = pixel_color.z() * scale;
-	// gamma 2.0으로 진행할 때, 지수에 1/2승해주면 된다.
+	// gamma 2.0으로 진행할 때, 1/2승해주면 된다.
 	double	r = sqrt(pixel_color.x() * scale);
 	double	g = sqrt(pixel_color.y() * scale);
 	double	b = sqrt(pixel_color.z() * scale);

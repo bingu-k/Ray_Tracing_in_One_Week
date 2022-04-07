@@ -46,7 +46,8 @@ bool sphere::hit(const ray &r, double t_min, double t_max, hit_record &rec) cons
 	}
 	rec.t = t;
 	rec.p = r.at(rec.t);
-	rec.normal = unit_vec3(rec.p - _center);
+	vec3	outward_normal = (rec.p - _center) / _radius;
+	rec.set_face_normal(r, outward_normal);
 	return (true);
 }
 
